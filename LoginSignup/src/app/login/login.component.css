@@ -1,0 +1,26 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.loginSection{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 80vh;
+}
+
+.loginform{
+    width: 600px;
+}
+
+.loginform label{
+    font-size: 20px;
+}
+
+.loginform button, input{
+    width: 100%;
+}
