@@ -25,14 +25,31 @@ ngOnInit():void{
     if(this.LoginForm.valid){
 this.userservice.checkUser(this.LoginForm.value).subscribe((res:any)=>{
   console.log(res);
+  // token from backend to a variable
   this.tokenData = res.data;
   console.log(this.tokenData)
-  localStorage.setItem('token',this.tokenData)
+  // getting details from token
+  var extractedToken = this.tokenData.split('.')[1];
+  console.log(extractedToken);
+  var atobData = atob(extractedToken);
+  console.log(atobData);
+  var parsedToken = JSON.parse(atobData);
+  console.log(parsedToken);
+  // checking whether it is admin or user and storing in localstorage accordingly
+  if(parsedToken.email === 'admin@gmail.com'){
+    localStorage.setItem('token', this.tokenData)
+    localStorage.setItem('adminData', atobData);
+  }
+  else{
+    localStorage.setItem('token',this.tokenData)
+    localStorage.setItem('userData', atobData);
+  }
  alert("Login Successfull");
   this.LoginForm.reset();
   this.router.navigate(['/dashboard']);
-},(err)=>{
-  console.log(err);
+},(err:any)=>{
+  console.log(err.message);
+  alert("Email or Password is incorrect")
 })
     }else{
       alert("Please check if the credentials are valid");

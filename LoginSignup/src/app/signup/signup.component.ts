@@ -18,7 +18,8 @@ export class SignupComponent {
       _id:'',
       uname:['', [Validators.required]],
       uemail:['', [Validators.email, Validators.required]],
-      upassword:['', [Validators.minLength(4), Validators.required]]
+      upassword:['', [Validators.minLength(4), Validators.required]],
+      urole:2
     })
   }
 
@@ -30,7 +31,9 @@ export class SignupComponent {
       this.signupForm.reset();
       this.router.navigate(['/login']);
     },(err)=>{
-      console.log(err);
+      if(err.status == 400){
+        alert("Email already exists. Please Try another Email");
+      }
     })
   }else{
   alert("Please check if the credentials are valid");

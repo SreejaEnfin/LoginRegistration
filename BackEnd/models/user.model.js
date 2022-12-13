@@ -9,6 +9,9 @@ const User = mongoose.model("user",{
     },
     upassword:{
         type:String
+    },
+    urole:{
+        type:Number,
     }
 });
 
